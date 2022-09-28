@@ -98,7 +98,7 @@ namespace List_assignment
             int numCount = TestForInt(10, 20);
             int counter = 0;
             for (int i = 0; i < list.Count; i++){
-                if (list[i] != numCount)
+                if (list[i] == numCount)
                     counter++;
             }
             Console.WriteLine($"The number {numCount} has {counter} occurences");
