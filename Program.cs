@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml.Schema;
 
@@ -49,30 +50,27 @@ namespace List_assignment
                     Console.WriteLine($"{i+1} - {list1[i]}");
                 }
                 Console.WriteLine("\nHere is the String List menu. Please select an option:");
-                Console.WriteLine();
                 Console.WriteLine("1 - Remove a vegetable by index");
-                Console.WriteLine("2 - ");
+                Console.WriteLine("2 - Remove a vegetable by name");
                 Console.WriteLine("3 - ");
                 Console.WriteLine("4 - ");
                 Console.WriteLine("5 - ");
                 Console.WriteLine("6 - ");
                 Console.WriteLine("7 - Quit");
-                Console.WriteLine();
                 Int32.TryParse(Console.ReadLine(), out choice);
 
-                if (choice == 1){
-
-                }
-                else if (choice == 2) { }
-                    
+                if (choice == 1)
+                    RemoveByIndex(list1);
+                else if (choice == 2)
+                    RemoveByVal(list1);
                 else if (choice == 3) { }
-                    
+
                 else if (choice == 4) { }
-                    
+
                 else if (choice == 5) { }
-                    
+
                 else if (choice == 6) { }
-                    
+
                 else if (choice == 7)
                     Console.WriteLine("Goodbye");
                 else{
@@ -82,9 +80,34 @@ namespace List_assignment
                 }
             }
         }
+        public static void RemoveByVal(List<String> list)
+        {
+            Console.Clear();
+            Console.WriteLine("Vegetables");
+            for (int i = 0; i < list.Count; i++)
+            {
+                Console.WriteLine($"{i + 1} - {list[i]}");
+            }
+            Console.WriteLine("Which vegetable do you want to remove?");
+            string vegRemove = Console.ReadLine();
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (vegRemove == list[i])
+                    list.RemoveAt(i);
+            }
+        }
         public static void RemoveByIndex(List<String> list)
         {
-
+            Console.Clear();
+            Console.WriteLine("Vegetables");
+            for (int i = 0; i < list.Count; i++)
+            {
+                Console.WriteLine($"{i + 1} - {list[i]}");
+            }
+            Console.WriteLine("Which vegetable number do you want to remove?");
+            int numRemove = TestForInt(1, list.Count);
+            list.RemoveAt(numRemove - 1);
+            Console.Clear();
         }
         public static void ListOfIntegers()
         {
