@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography.X509Certificates;
+using System.Xml.Schema;
 
 namespace List_assignment
 {
@@ -6,7 +7,32 @@ namespace List_assignment
     {
         static void Main(string[] args)
         {
-            ListOfIntegers();
+            int choice = 0;
+            while (choice != 3)
+            {
+                Console.WriteLine("\nHere is the list assignment menu.  Please select an option:");
+                Console.WriteLine();
+                Console.WriteLine("1 - Go to the Integer List Menu");
+                Console.WriteLine("2 - Go to the String List Menu");
+                Console.WriteLine("3 - Quit");
+                Console.WriteLine();
+                Int32.TryParse(Console.ReadLine(), out choice);
+
+                if (choice == 1)
+                    ListOfIntegers();
+                else if (choice == 2)
+                    ListOfStrings();
+                else if (choice == 3)
+                    Console.WriteLine("Goodbye");
+                else{
+                    Console.WriteLine("Invalid choice, press ENTER to continue.");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
+            }
+        }
+        public static void ListOfStrings()
+        {
 
         }
         public static void ListOfIntegers()
@@ -32,7 +58,7 @@ namespace List_assignment
                 printThis += "]";
                 Console.WriteLine(printThis);
 
-                Console.WriteLine("\nHere is the looping problems menu.  Please select an option:");
+                Console.WriteLine("\nHere is the Integer List menu. Please select an option:");
                 Console.WriteLine();
                 Console.WriteLine("1 - Sort the list");
                 Console.WriteLine("2 - Make a new list of random numbers");
@@ -63,16 +89,98 @@ namespace List_assignment
                     AddValueToList(list1);
                 else if (choice == 5)
                     CountNumberOfRepeats(list1);
+                else if (choice == 6)
+                    FindLargestVal(list1);
+                else if (choice == 7)
+                    FindSmallestVal(list1);
                 else if (choice == 8)
                     Console.WriteLine("Goodbye");
-
-                else
-                {
+                else if (choice == 9)
+                    SumAverage(list1);
+                else if (choice == 10)
+                    MostOccuringVal(list1);
+                else if (choice == 11)
+                    CountNumberOfRepeats(list1);
+                else{
                     Console.WriteLine("Invalid choice, press ENTER to continue.");
                     Console.ReadLine();
+                    Console.Clear();
                 }
             }
-            
+        }
+        public static void MostOccuringVal(List<int> list)
+        {
+            Console.Clear();
+            int count; int maxCount = 0;
+            string val = "";
+            for (int i = 10; i < 21; i++)
+            {
+                count = 0;
+                for (int j =0; j<list.Count; j++)
+                {
+                    if (list[j] ==i)
+                        count++;
+                }
+                if (count > maxCount){
+                    maxCount = count;
+                    val = Convert.ToString(i);
+                }
+                else if (count == maxCount){
+                    val += ($", {i}");
+                }
+            }
+            if (Int32.TryParse(val, out int valInt))
+                Console.WriteLine($"The number {val} has the most occurences with {maxCount} occurences");
+            else
+                Console.WriteLine($"The numbers {val} have the most occurences with {maxCount} occurences each");
+            Console.WriteLine("Press enter to return to the menu");
+            Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("Here is the list of integers: ");
+        }
+        public static void SumAverage(List<int> list)
+        {
+            Console.Clear();
+            int totalVal = 0;
+            for (int i = 0; i < list.Count; i++)
+            {
+                totalVal += list[i];
+            }
+            Console.WriteLine($"The sum of the numbers is {totalVal} and the average is {totalVal/list.Count}");
+            Console.WriteLine("Press enter to return to the menu");
+            Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("Here is the list of integers: ");
+        }
+        public static void FindLargestVal(List <int> list)
+        {
+            Console.Clear();
+            int largest = 0;
+            for (int i =0; i < list.Count; i++)
+            {
+                if (list[i] > largest)
+                    largest = list[i];
+            }
+            Console.WriteLine($"The largest value is {largest}");
+            Console.WriteLine("Press enter to return to the menu");
+            Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("Here is the list of integers: ");
+        }
+        public static void FindSmallestVal(List<int> list)
+        {
+            Console.Clear();
+            int smallest = 21;
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i] < smallest)
+                    smallest = list[i];
+            }
+            Console.WriteLine($"The smallest value is {smallest}");
+            Console.WriteLine("Press enter to return to the menu");
+            Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("Here is the list of integers: ");
         }
         public static void AddValueToList(List<int> list)
         {
@@ -111,7 +219,7 @@ namespace List_assignment
         {
             Console.Clear();
             Random rand = new Random();
-            for (int i = 0; i < 25; i++)
+            for (int i = 0; i < list.Count; i++)
             {
                 list[i]=(rand.Next(10, 21));
             }
