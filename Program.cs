@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Xml.Schema;
 
 namespace List_assignment
@@ -7,10 +8,14 @@ namespace List_assignment
     {
         static void Main(string[] args)
         {
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Clear();
             int choice = 0;
             while (choice != 3)
             {
-                Console.WriteLine("\nHere is the list assignment menu.  Please select an option:");
+                Console.Clear();
+                Console.WriteLine("Here is the list assignment menu.  Please select an option:");
                 Console.WriteLine();
                 Console.WriteLine("1 - Go to the Integer List Menu");
                 Console.WriteLine("2 - Go to the String List Menu");
@@ -33,6 +38,52 @@ namespace List_assignment
         }
         public static void ListOfStrings()
         {
+            List<string> list1 = new List<string>() {"CARROT", "BEET", "CELERY", "RADISH", "CABBAGE"};
+            int choice = 0;
+            while (choice != 7)
+            {
+                Console.Clear();
+                Console.WriteLine("Vegetables");
+                for (int i =0 ; i < list1.Count; i++)
+                {
+                    Console.WriteLine($"{i+1} - {list1[i]}");
+                }
+                Console.WriteLine("\nHere is the String List menu. Please select an option:");
+                Console.WriteLine();
+                Console.WriteLine("1 - Remove a vegetable by index");
+                Console.WriteLine("2 - ");
+                Console.WriteLine("3 - ");
+                Console.WriteLine("4 - ");
+                Console.WriteLine("5 - ");
+                Console.WriteLine("6 - ");
+                Console.WriteLine("7 - Quit");
+                Console.WriteLine();
+                Int32.TryParse(Console.ReadLine(), out choice);
+
+                if (choice == 1){
+
+                }
+                else if (choice == 2) { }
+                    
+                else if (choice == 3) { }
+                    
+                else if (choice == 4) { }
+                    
+                else if (choice == 5) { }
+                    
+                else if (choice == 6) { }
+                    
+                else if (choice == 7)
+                    Console.WriteLine("Goodbye");
+                else{
+                    Console.WriteLine("Invalid choice, press ENTER to continue.");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
+            }
+        }
+        public static void RemoveByIndex(List<String> list)
+        {
 
         }
         public static void ListOfIntegers()
@@ -43,9 +94,6 @@ namespace List_assignment
             {
                 list1.Add(rand.Next(10, 21));
             }
-            Console.BackgroundColor = ConsoleColor.White;
-            Console.ForegroundColor = ConsoleColor.Black;
-            Console.Clear(); // Optional
             int choice = 0;
             Console.WriteLine("Here is the List of numbers: ");
 
@@ -75,14 +123,19 @@ namespace List_assignment
                 Int32.TryParse(Console.ReadLine(), out choice);
                 Console.WriteLine();
 
-                if (choice == 1)
-                {
+                if (choice == 1){
                     Console.Clear();
                     list1.Sort();
                     Console.WriteLine("Here is your sorted list of Numbers: ");
                 }
-                else if (choice == 2)
-                    NewRandomList(list1);
+                else if (choice == 2){
+                    Console.Clear();
+                    for (int i = 0; i < 25; i++)
+                    {
+                        list1.Add(rand.Next(10, 21));
+                    }
+                    Console.WriteLine("Here is your new list of Numbers");
+                }
                 else if (choice == 3)
                     RemoveValue(list1);
                 else if (choice == 4)
@@ -214,16 +267,6 @@ namespace List_assignment
             Console.ReadLine();
             Console.Clear();
             Console.WriteLine("Here is the list of numbers: ");
-        }
-        public static void NewRandomList(List<int> list)
-        {
-            Console.Clear();
-            Random rand = new Random();
-            for (int i = 0; i < list.Count; i++)
-            {
-                list[i]=(rand.Next(10, 21));
-            }
-            Console.WriteLine("Here is your new list of Numbers");
         }
         public static void RemoveValue(List<int> list)
         {
