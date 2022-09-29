@@ -21,7 +21,6 @@ namespace List_assignment
                 Console.WriteLine("1 - Go to the Integer List Menu");
                 Console.WriteLine("2 - Go to the String List Menu");
                 Console.WriteLine("3 - Quit");
-                Console.WriteLine();
                 Int32.TryParse(Console.ReadLine(), out choice);
 
                 if (choice == 1)
@@ -44,7 +43,7 @@ namespace List_assignment
             while (choice != 7)
             {
                 Console.Clear();
-                Console.WriteLine("Vegetables");
+                Console.WriteLine("Vegetables:");
                 for (int i =0 ; i < list1.Count; i++)
                 {
                     Console.WriteLine($"{i+1} - {list1[i]}");
@@ -52,10 +51,10 @@ namespace List_assignment
                 Console.WriteLine("\nHere is the String List menu. Please select an option:");
                 Console.WriteLine("1 - Remove a vegetable by index");
                 Console.WriteLine("2 - Remove a vegetable by name");
-                Console.WriteLine("3 - ");
-                Console.WriteLine("4 - ");
-                Console.WriteLine("5 - ");
-                Console.WriteLine("6 - ");
+                Console.WriteLine("3 - Search for a vegetable by name");
+                Console.WriteLine("4 - Add a vegetable by name");
+                Console.WriteLine("5 - Sort the List");
+                Console.WriteLine("6 - Clear the List");
                 Console.WriteLine("7 - Quit");
                 Int32.TryParse(Console.ReadLine(), out choice);
 
@@ -63,14 +62,14 @@ namespace List_assignment
                     RemoveByIndex(list1);
                 else if (choice == 2)
                     RemoveByVal(list1);
-                else if (choice == 3) { }
-
-                else if (choice == 4) { }
-
-                else if (choice == 5) { }
-
-                else if (choice == 6) { }
-
+                else if (choice == 3)
+                    SearchByVal(list1);
+                else if (choice == 4)
+                    AddVegetable(list1);
+                else if (choice == 5)
+                    list1.Sort();
+                else if (choice == 6)
+                    list1.Clear();
                 else if (choice == 7)
                     Console.WriteLine("Goodbye");
                 else{
@@ -78,6 +77,70 @@ namespace List_assignment
                     Console.ReadLine();
                     Console.Clear();
                 }
+            }
+        }
+        public static void AddVegetable(List<String> list)
+        {
+            Console.Clear();
+            Console.WriteLine("Which vegetable do you want to add to the list?");
+            string vegAdd = Console.ReadLine().Replace(" ", "").ToUpper();
+            while (vegAdd == null)
+            {
+                Console.WriteLine("Please enter a valid name.");
+                vegAdd = Console.ReadLine().Replace(" ", "").ToUpper();
+            }
+            bool exists = false;
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (vegAdd == list[i]){
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists){
+                list.Add(vegAdd);
+                Console.WriteLine($"The item {vegAdd} has been added at index number {list.Count}");
+                Console.WriteLine("Press enter to return to the main menu");
+                Console.ReadLine();
+            }
+            else{
+                Console.WriteLine("Error, This item already exists in the list");
+                Console.WriteLine("Press enter to return to the main menu");
+                Console.ReadLine();
+            }
+        }
+        public static void SearchByVal(List<String> list)
+        {
+            Console.Clear();
+            Console.WriteLine("Vegetables");
+            for (int i = 0; i < list.Count; i++)
+            {
+                Console.WriteLine($"{i + 1} - {list[i]}");
+            }
+            Console.WriteLine("Which vegetable do you want to search for?");
+            string vegSearch = Console.ReadLine().Replace(" ", "").ToUpper();
+            while (vegSearch == null)
+            {
+                Console.WriteLine("Please enter a valid name.");
+                vegSearch = Console.ReadLine().Replace(" ", "").ToUpper();
+            }
+            int positionOfVeg = -1;
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (vegSearch == list[i]){
+                    positionOfVeg = i;
+                    break;
+                }
+            }
+            if (positionOfVeg != -1){
+                Console.WriteLine($"The Vegetable {vegSearch} was found at index {positionOfVeg+1}");
+                Console.WriteLine("Press enter to return to the main menu");
+                Console.ReadLine();
+            }
+            else{
+                Console.WriteLine($"The Vegetable {vegSearch} was not found in the list");
+                Console.WriteLine("Press enter to return to the main menu");
+                Console.ReadLine();
             }
         }
         public static void RemoveByVal(List<String> list)
@@ -89,11 +152,21 @@ namespace List_assignment
                 Console.WriteLine($"{i + 1} - {list[i]}");
             }
             Console.WriteLine("Which vegetable do you want to remove?");
-            string vegRemove = Console.ReadLine();
+            string vegRemove = Console.ReadLine().Replace(" ", "").ToUpper();
             for (int i = 0; i < list.Count; i++)
             {
-                if (vegRemove == list[i])
+                if (vegRemove == list[i]){
                     list.RemoveAt(i);
+                    Console.WriteLine($"The item {vegRemove} has been removed from position {i+1} on the list.");
+                    Console.WriteLine("Press enter to return to the main menu");
+                    Console.ReadLine();
+                }
+                else if(i == (list.Count) - 1)
+                {
+                    Console.WriteLine($"The item {vegRemove} was not found in the list");
+                    Console.WriteLine("Press enter to return to the main menu");
+                    Console.ReadLine();
+                }
             }
         }
         public static void RemoveByIndex(List<String> list)
